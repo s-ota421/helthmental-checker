@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログイン - 体調管理システム</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card" style="max-width: 400px; margin: 50px auto; padding: 20px; text-align: center;">
+        <h2 class="input-h">利用者ログイン</h2>
+        <p class="input-p">IDを入力してください</p>
+       <input
+        id="user-id"
+        class="input-login"
+        type="text"
+        placeholder="利用者IDを入力"
+      >
+         
+        <br><br>
+
+        <button class="input-save" onclick="goToInput()" style="width: 100%;">決定</button>
+    </div>
+
+     <script src="js/api.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
