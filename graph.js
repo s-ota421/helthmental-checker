@@ -96,11 +96,11 @@ function drawChart(rows) {
       + dateObj.getDate();
 
     chartData.push([
-      shortDate,
-      Number(row[2]),
-      Number(row[3]),
-      Number(row[4])
-    ]);
+     shortDate,
+    Number(row[3]),
+    Number(row[4]),
+    Number(row[5])
+]);
   });
 
   const data =
@@ -113,7 +113,7 @@ function drawChart(rows) {
       document.getElementById('curve_chart')
     );
 
-  chart.draw(data, {
+    chart.draw(data, {
     curveType: 'function',
     legend: { position: 'bottom' },
     vAxis: {
