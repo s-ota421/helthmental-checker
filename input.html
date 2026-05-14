@@ -41,7 +41,7 @@
     </select>
   </div>
   <div class="field" style="margin-top: 20px;">
-    <label class="input-label">その他</label>
+    <label class="input-label">一言メモ</label>
     <textarea id="notes" placeholder="詳細を入力してください"></textarea>
   </div>
 </div>
@@ -50,7 +50,8 @@
 
   <button class="input-save" onclick="save()">保存</button>
 
-<button class="input-save" onclick="location.href='graph.html?name=' + encodeURIComponent(userName)">
+<button class="input-save"
+onclick="location.href='graph.html?id=' + encodeURIComponent(id)">
   グラフ表示
 </button>
 
