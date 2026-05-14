@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本日の体調</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <h2 class="input-h">今日の体調入力</h2>
+
+ <div class="user-display" style="text-align: center; color: #666; margin-bottom: 10px;">
+  ログイン中: <span id="current-user-name" style="font-weight: bold; color: #333;">読み込み中...</span>
+</div>
+
+  <p class="input-p">体調</p>
+  <div id="physical-buttons" class="button-group" ></div>
+   
+
+  <p class="input-p">メンタル</p>
+  <div id="mental-buttons" class="button-group"></div>
+   
+
+  <p class="input-p">眠れた感</p>
+  <div id="sleep-buttons" class="button-group"></div>
+    
+    
+<div class="card">
+  <p class="section-title">原因・背景</p>
+  <div class="field">
+    <label class="input-l">原因・背景</label>
+    <select id="symptom-select" onchange="handleSymptom(this)">
+      <option value="">— 選択してください —</option>
+      <option value="頭痛">頭痛</option>
+      <option value="だるい">だるい</option>
+      <option value="寝不足">寝不足</option>
+      <option value="人疲れ">人疲れ</option>
+      <option value="勉強疲れ">勉強疲れ</option>
+      <option value="発熱">発熱</option>
+      <option value="特になし">特になし</option>
+    </select>
+  </div>
+  <div class="field" style="margin-top: 20px;">
+    <label class="input-label">その他</label>
+    <textarea id="notes" placeholder="詳細を入力してください"></textarea>
+  </div>
+</div>
+
+  <br><br>
+
+  <button class="input-save" onclick="save()">保存</button>
+
+<button class="input-save" onclick="location.href='graph.html?name=' + encodeURIComponent(userName)">
+  グラフ表示
+</button>
+
+  <script src="js/api.js"></script>
+  <script src="js/input.js"></script>
+</body>
+</html>

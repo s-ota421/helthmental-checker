@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>推移グラフ - 体調管理</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- ★1. まずライブラリを一番最初に読み込む（絶対に自分のスクリプトより上に書く） -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js
+"></script>
+</head>
+<body>
+  <div class="container">
+    <h2 class="input-h">コンディション推移</h2>
+    
+    <div class="user-display" style="text-align: center; margin-bottom: 10px;">
+      ログイン中: <span id="current-name" style="font-weight:bold;">---</span>
+    </div>
+
+    <div class="card" style="padding: 10px; margin-top: 20px;">
+      <div id="curve_chart" style="width: 100%; height: 350px;">
+        <p style="text-align:center; padding-top:100px;">データを読み込み中...</p>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px;">
+      <button class="input-save" id="back-btn">入力に戻る</button>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/graph.js"></script>
+</body>
+</html>
