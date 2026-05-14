@@ -131,10 +131,19 @@ function save() {
   alert("保存しました。今日も一日お疲れさまです。");
 }
 
-
-
-
 // 初期化
 createButtons("physical-buttons", "physical");
 createButtons("mental-buttons", "mental");
 createButtons("sleep-buttons", "sleep");
+
+// グラフ画面へ
+document.getElementById(
+  "graph-btn"
+).onclick = () => {
+
+  console.log("graphへ:", id);
+
+  location.href =
+    "graph.html?id=" +
+    encodeURIComponent(id);
+};
