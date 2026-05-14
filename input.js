@@ -106,9 +106,7 @@ function save() {
   const notes = document.getElementById("notes").value;
   
   let symptomValue = document.getElementById("symptom-select").value; // セレクトボックスのIDに合わせてください
-  if (symptomValue === 'other') {
-    symptomValue = document.getElementById('free-text').value;
-  }
+ 
 
   const record = {
     date: new Date().toLocaleDateString("ja-JP"),
@@ -133,16 +131,7 @@ function save() {
   alert("保存しました。今日も一日お疲れさまです。");
 }
 
-  function handleSymptom(sel) {
-  const fi = document.getElementById('free-input');
-  if (sel.value === 'other') {
-    fi.classList.add('visible');
-    document.getElementById('free-text').focus();
-  } else {
-    fi.classList.remove('visible');
-    document.getElementById('free-text').value = '';
-  }
-}
+
 
 
 // 初期化
