@@ -46,7 +46,7 @@ const state = {
 function createButtons(containerId, type) {
   const container = document.getElementById(containerId);
 
-  for (let i = 0; i <= 10; i++) {
+  for (let i = 1; i <= 10; i++) {
     const btn = document.createElement("button");
     btn.textContent = i;
     btn.classList.add("circle-btn")
@@ -101,16 +101,18 @@ function updateSelected(container, selectedValue) {
   });
 }
 // 保存
-function save() {
+let isSaving = false; // 二重送信防止フラグ
+
+async function save() {
+  if (isSaving) return; // 連打防止
+  isSaving = true;
 
   const notes = document.getElementById("notes").value;
-  
-  let symptomValue = document.getElementById("symptom-select").value; // セレクトボックスのIDに合わせてください
- 
+  const symptomValue = document.getElementById("symptom-select").value;
 
   const record = {
     date: new Date().toLocaleDateString("ja-JP"),
-    id:id,
+    id: id,
     name: currentUser.name,
     physical: state.physical,
     mental: state.mental,
@@ -119,16 +121,26 @@ function save() {
     notes: notes
   };
 
-  
-  fetch("https://script.google.com/macros/s/AKfycbxqqvWP2MzB-Yn-BruS08BrGh_TsI2YBy7yRcVptcWtSKlJapD1eGDv99DPruUVcEh--g/exec", {
-    method: "POST",
-    mode: "no-cors",
-    body: JSON.stringify(record)
-  });
+  try {
+    const res = await fetch("https://script.google.com/macros/s/AKfy..../exec", {
+      method: "POST",
+      // mode: "no-cors" を削除してレスポンスを受け取る
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify(record)
+    });
+    const result = await res.json();
 
-  console.log(record);
-
-  alert("保存しました。今日も一日お疲れさまです。");
+    if (result.status === "updated") {
+      alert("上書き保存しました。今日も一日お疲れさまです。");
+    } else {
+      alert("保存しました。今日も一日お疲れさまです。");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("保存に失敗しました");
+  } finally {
+    isSaving = false;
+  }
 }
 
 // 初期化
