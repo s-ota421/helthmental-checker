@@ -16,7 +16,7 @@ async function goToInput() {
     }
 
     // ステータスチェック
-    if (data.status !== "入所中") {
+    if (data.status !== "在籍") {
       alert("現在ログインできません（ステータス：" + data.status + "）");
       return;
     }
