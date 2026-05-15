@@ -1,4 +1,4 @@
-const GAS_URL = "https://script.google.com/macros/s/AKfycbxqqvWP2MzB-Yn-BruS08BrGh_TsI2YBy7yRcVptcWtSKlJapD1eGDv99DPruUVcEh--g/exec";
+const GAS_URL = "https://script.google.com/macros/s/AKfycbyDC4-v8DXFlOcdi2MBMJL5Zm2fGc4INRHTj-CEyQ0H-q-V4nBb9Xf2qNplu5ww3on6qw/exec";
 
 // 利用者取得
 function getUserName(id) {
