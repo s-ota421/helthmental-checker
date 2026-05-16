@@ -1,30 +1,21 @@
-const GAS_URL = "https://script.google.com/macros/s/AKfycbyDC4-v8DXFlOcdi2MBMJL5Zm2fGc4INRHTj-CEyQ0H-q-V4nBb9Xf2qNplu5ww3on6qw/exec";
+const GAS_URL = "https://script.google.com/macros/s/AKfycbxqqvWP2MzB-Yn-BruS08BrGh_TsI2YBy7yRcVptcWtSKlJapD1eGDv99DPruUVcEh--g/exec";
 
-// 利用者取得
 function getUserName(id) {
   return new Promise((resolve, reject) => {
-    // コールバック関数名をユニークに
     const callbackName = "jsonpCallback_" + Date.now();
-
-    // タイムアウト処理
     const timer = setTimeout(() => {
       delete window[callbackName];
       document.body.removeChild(script);
       reject(new Error("タイムアウト"));
     }, 10000);
-
-    // コールバック関数を定義
     window[callbackName] = (data) => {
       clearTimeout(timer);
       delete window[callbackName];
       document.body.removeChild(script);
       resolve(data);
     };
-
-    // scriptタグでリクエスト
     const script = document.createElement("script");
-    script.src =
-      "https://script.google.com/macros/s/AKfycbxqqvWP2MzB-Yn-BruS08BrGh_TsI2YBy7yRcVptcWtSKlJapD1eGDv99DPruUVcEh--g/exec" +
+    script.src = GAS_URL +
       "?type=user&id=" + encodeURIComponent(id) +
       "&callback=" + callbackName;
     script.onerror = () => {
