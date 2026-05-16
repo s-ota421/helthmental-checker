@@ -1,6 +1,3 @@
-const res = await fetch(
-  "https://script.google.com/macros/s/AKfycbxqqvWP2MzB-Yn-BruS08BrGh_TsI2YBy7yRcVptcWtSKlJapD1eGDv99DPruUVcEh--g/exec",
-
 let currentUser = null;
 const params = new URLSearchParams(location.search);
 const id = params.get("id");
