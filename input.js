@@ -76,8 +76,8 @@ async function save() {
   console.log("送信するid:", id);
   console.log("送信するrecord:", JSON.stringify(record));
   try {
-    const res = await fetch(
-      "https://script.google.com/macros/s/AKfycbxqqvWP2MzB-Yn-BruS08BrGh_TsI2YBy7yRcVptcWtSKlJapD1eGDv99DPruUVcEh--g/exec",
+ const res = await fetch(
+  "https://script.google.com/macros/s/AKfycbxqqvWP2MzB-Yn-BruS08BrGh_TsI2YBy7yRcVptcWtSKlJapD1eGDv99DPruUVcEh--g/exec",
       {
         method: "POST",
         headers: { "Content-Type": "text/plain" },
