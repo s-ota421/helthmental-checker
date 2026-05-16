@@ -2,7 +2,6 @@ let currentUser = null;
 const params = new URLSearchParams(location.search);
 const id = params.get("id");
 console.log(id);
-
 window.onload = async () => {
   if (id) {
     try {
@@ -19,13 +18,11 @@ window.onload = async () => {
     location.href = "index.html";
   }
 };
-
 const state = {
   physical: null,
   mental: null,
   sleep: null
 };
-
 function createButtons(containerId, type) {
   const container = document.getElementById(containerId);
   for (let i = 1; i <= 10; i++) {
@@ -44,12 +41,10 @@ function createButtons(containerId, type) {
     btn.onclick = () => {
       state[type] = i;
       updateSelected(container, i);
-      console.log(type, i);
     };
     container.appendChild(btn);
   }
 }
-
 function updateSelected(container, selectedValue) {
   container.querySelectorAll("button").forEach((btn) => {
     btn.classList.remove("selected");
@@ -58,24 +53,16 @@ function updateSelected(container, selectedValue) {
     }
   });
 }
-
-// 二重送信防止フラグ
 let isSaving = false;
-
 async function save() {
   if (isSaving) return;
-
-  // バリデーション
   if (!state.physical || !state.mental || !state.sleep) {
     alert("すべての項目を選択してください");
     return;
   }
-
   isSaving = true;
-
   const notes = document.getElementById("notes").value;
   const symptomValue = document.getElementById("symptom-select").value;
-
   const record = {
     date: new Date().toLocaleDateString("ja-JP"),
     id: id,
@@ -86,10 +73,8 @@ async function save() {
     symptom: symptomValue,
     notes: notes
   };
-
-console.log("送信するid:", id);
+  console.log("送信するid:", id);
   console.log("送信するrecord:", JSON.stringify(record));
-  
   try {
     const res = await fetch(
       "https://script.google.com/macros/s/AKfycbxqqvWP2MzB-Yn-BruS08BrGh_TsI2YBy7yRcVptcWtSKlJapD1eGDv99DPruUVcEh--g/exec",
@@ -100,13 +85,11 @@ console.log("送信するid:", id);
       }
     );
     const result = await res.json();
-
     if (result.status === "updated") {
       alert("上書き保存しました。今日も一日お疲れさまです。");
     } else {
       alert("保存しました。今日も一日お疲れさまです。");
     }
-    console.log(record);
   } catch (err) {
     console.error(err);
     alert("保存に失敗しました。もう一度お試しください。");
@@ -114,12 +97,9 @@ console.log("送信するid:", id);
     isSaving = false;
   }
 }
-
 createButtons("physical-buttons", "physical");
 createButtons("mental-buttons", "mental");
 createButtons("sleep-buttons", "sleep");
-
 document.getElementById("graph-btn").onclick = () => {
-  console.log("graphへ:", id);
   location.href = "graph.html?id=" + encodeURIComponent(id);
 };
