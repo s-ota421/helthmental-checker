@@ -87,6 +87,9 @@ async function save() {
     notes: notes
   };
 
+console.log("送信するid:", id);
+  console.log("送信するrecord:", JSON.stringify(record));
+  
   try {
     const res = await fetch(
       "https://script.google.com/macros/s/AKfycbxqqvWP2MzB-Yn-BruS08BrGh_TsI2YBy7yRcVptcWtSKlJapD1eGDv99DPruUVcEh--g/exec",
