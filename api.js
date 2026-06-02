@@ -8,13 +8,31 @@ async function getUserName(id) {
 
 async function getConditionData(id) {
   const now = new Date();
-  const month = now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0");
-  const res = await fetch(
-    GAS_URL + "?type=monthly&userId=" + encodeURIComponent(id) + "&month=" + month
-  );
-  const data = await res.json();
-  return data.map(row => [
-    row.date, row.id, row.name,
-    row.physical, row.mental, row.sleep
+  
+  // 当月
+  const month1 = now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0");
+  
+  // 先月
+  const prev = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  const month2 = prev.getFullYear() + "-" + String(prev.getMonth() + 1).padStart(2, "0");
+
+  // 当月と先月を両方取得
+  const [res1, res2] = await Promise.all([
+    fetch(GAS_URL + "?type=monthly&userId=" + encodeURIComponent(id) + "&month=" + month1),
+    fetch(GAS_URL + "?type=monthly&userId=" + encodeURIComponent(id) + "&month=" + month2)
   ]);
+
+  const [data1, data2] = await Promise.all([res1.json(), res2.json()]);
+
+  // 結合して日付順に並べ、過去14日間に絞る
+  const all = [...data2, ...data1];
+  const twoWeeksAgo = new Date();
+  twoWeeksAgo.setDate(now.getDate() - 14);
+
+  return all
+    .filter(row => new Date(row.date) >= twoWeeksAgo)
+    .map(row => [
+      row.date, row.id, row.name,
+      row.physical, row.mental, row.sleep
+    ]);
 }
